@@ -15,9 +15,9 @@ namespace web_http = web::http;
 namespace web_json = web::json;
 namespace listener = web_http::experimental::listener;
 
-struct FirstService {
-    FirstService();
-    ~FirstService();
+struct ProxyService {
+    ProxyService();
+    ~ProxyService();
     void start();
     void stop();
     void get(const web_http::http_request&) const;

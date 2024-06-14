@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-void FirstService::get(const web_http::http_request& request) const {
+void ProxyService::get(const web_http::http_request& request) const {
     std::string param = utility::conversions::to_utf8string(request.absolute_uri().query());
     std::cout << "query parameter is : " << param << '\n';
 
@@ -20,23 +20,24 @@ void FirstService::get(const web_http::http_request& request) const {
     request.reply(web_http::status_codes::OK, response);
 }
 
-FirstService::FirstService() : listener("http://localhost:1717/firstService") {
+ProxyService::ProxyService() : listener("http://localhost:1741/ProxyService") {
     //listener.support(methods::POST, std::bind(&UserService::handle_post, this, std::placeholders::_1));
     //listener.support(methods::PUT, std::bind(&UserService::handle_put, this, std::placeholders::_1));
     //listener.support(methods::DELETE, std::bind(&UserService::handle_delete, this, std::placeholders::_1));
-    listener.support(web_http::methods::GET, std::bind(&FirstService::get, this, std::placeholders::_1));
+    listener.support(web_http::methods::GET, std::bind(&ProxyService::get, this, std::placeholders::_1));
 }
 
-FirstService::~FirstService() {
+ProxyService::~ProxyService() {
+    std::cout << "ProxyService is being destroyed!\n";
     this->stop();
 }
 
-void FirstService::start() {
-    std::cout << "Starting FirstService!\n";
+void ProxyService::start() {
+    std::cout << "Starting ProxyService!\n";
     listener.open().wait();
 }
 
-void FirstService::stop() {
-    std::cout << "FirstService is being stopped!\n";
+void ProxyService::stop() {
+    std::cout << "ProxyService is being stopped!\n";
     listener.close().wait();
 }

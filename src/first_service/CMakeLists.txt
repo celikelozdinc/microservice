@@ -3,7 +3,7 @@ find_package(cpprestsdk REQUIRED) #requires sudo apt-get install libcpprest-dev
 
 message(OPENSSL LIBRARIES  " => ${OPENSSL_LIBRARIES}")
 
-set(This first_service)
+set(This proxy_service)
 
 add_library(${This} service.cpp) #static lib
 

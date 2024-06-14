@@ -15,5 +15,5 @@ add_executable(${This} main.cpp)
 
 target_link_libraries(${This} PUBLIC
         #cpprestsdk::cpprest
-        first_service
+        proxy_service
 )
