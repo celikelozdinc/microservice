@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package expcmake;
+
+enum Type {
+    Small = 0;
+    Medium = 1;
+    Big = 2;
+    Large = 3;
+}
+
+message Room {
+    string _name                = 1;
+    int64 _number               = 2;
+    Type _type                  = 3;
+    optional int64 _residents   = 4;
+}

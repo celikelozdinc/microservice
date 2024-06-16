@@ -5,15 +5,16 @@ project(microservice
 )
 
 set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_BUILD_TYPE RelWithDebInfo)
 set(This microservice)
 
 add_subdirectory(src)
-
-#find_package(cpprestsdk REQUIRED) #sudo apt-get install libcpprest-dev
+add_subdirectory(proto)
 
 add_executable(${This} main.cpp)
 
 target_link_libraries(${This} PUBLIC
-        #cpprestsdk::cpprest
         proxy_service
+        #room_service
+        #customer_service
 )

@@ -1,7 +1,7 @@
-find_package(cpprestsdk REQUIRED) #requires sudo apt-get install libcpprest-dev
+find_package(cpprestsdk REQUIRED) # requires sudo apt-get install libcpprest-dev
 #find_package(OpenSSL REQUIRED)
 
-message(OPENSSL LIBRARIES  " => ${OPENSSL_LIBRARIES}")
+message(OPENSSL_LIBRARIES  " => ${OPENSSL_LIBRARIES}")
 
 set(This proxy_service)
 
