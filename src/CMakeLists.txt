@@ -1,2 +1,3 @@
-add_subdirectory(first_service)
-#add_subdirectory(client)
+add_subdirectory(proxy_service)
+add_subdirectory(room_service)
+#add_subdirectory(customer_service)

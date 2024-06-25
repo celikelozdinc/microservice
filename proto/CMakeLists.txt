@@ -69,10 +69,9 @@ add_custom_command(
 )
 
 # Add custom target for proto files
-add_custom_target(generate_proto_files ALL DEPENDS ${GENERATED_SRCS} ${GENERATED_HDRS})
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-include_directories(${GENERATED_CODE_DIR})
-
+#add_custom_target(generate_proto_files ALL DEPENDS ${GENERATED_SRCS} ${GENERATED_HDRS})
+#include_directories(${CMAKE_CURRENT_BINARY_DIR})
+#include_directories(${GENERATED_CODE_DIR})
 
 #[===[
 block comment

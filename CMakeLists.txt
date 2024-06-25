@@ -13,8 +13,17 @@ add_subdirectory(proto)
 
 add_executable(${This} main.cpp)
 
-target_link_libraries(${This} PUBLIC
-        proxy_service
-        #room_service
-        #customer_service
+target_include_directories(${This}
+    PRIVATE
+        ${CMAKE_CURRENT_BINARY_DIR}/proto/generated
+)
+
+target_link_libraries(${This} 
+        PRIVATE
+                proxy_service
+                room_service
+                #customer_service
+                libprotobuf
+                grpc
+                grpc++
 )

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package expcmake;
+package roompackage;
 
 enum Type {
     Small = 0;
@@ -9,9 +9,22 @@ enum Type {
     Large = 3;
 }
 
-message Room {
+service RoomService {
+    rpc CreateRoom(RoomRequest) returns (RoomResponse);
+    //rpc GetRoom(int64) returns (Room);
+    //rpc GetRooms() returns (stream Room);
+    //rpc UpdateRoom(Room) returns (Room);
+};
+
+
+message RoomResponse {
     string _name                = 1;
     int64 _number               = 2;
     Type _type                  = 3;
     optional int64 _residents   = 4;
+}
+
+message RoomRequest {
+    string _name                = 1;
+    int64 _number               = 2;
 }
