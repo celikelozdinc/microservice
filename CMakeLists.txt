@@ -15,7 +15,7 @@ add_executable(${This} main.cpp)
 
 target_include_directories(${This}
     PRIVATE
-        ${CMAKE_CURRENT_BINARY_DIR}/proto/generated
+        ${CMAKE_BINARY_DIR}/generated
 )
 
 target_link_libraries(${This} 
@@ -23,7 +23,7 @@ target_link_libraries(${This}
                 proxy_service
                 room_service
                 #customer_service
-                libprotobuf
-                grpc
-                grpc++
+                protolibrary
 )
+
+add_custom_target(exec DEPENDS ${This})

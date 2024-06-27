@@ -5,10 +5,19 @@ message(OPENSSL_LIBRARIES  " => ${OPENSSL_LIBRARIES}")
 
 set(This proxy_service)
 
-add_library(${This} service.cpp) #static lib
+add_library(${This} STATIC service.cpp) #static lib
 
-target_link_libraries(${This} PRIVATE
-        cpprestsdk::cpprest
-        ${OPENSSL_LIBRARIES}
-        #OpenSSL::OpenSSL
+target_include_directories(${This}
+    PRIVATE
+        ${CMAKE_BINARY_DIR}/generated
 )
+
+target_link_libraries(${This} 
+        PRIVATE
+                cpprestsdk::cpprest
+                ${OPENSSL_LIBRARIES}
+                #OpenSSL::OpenSSL
+                protolibrary
+)
+
+add_custom_target(proxyservice DEPENDS ${This})

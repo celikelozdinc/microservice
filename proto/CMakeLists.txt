@@ -29,7 +29,8 @@ FetchContent_MakeAvailable(protobuf gRPC)
 
 include_directories(${GRPC_INCLUDE_DIRS} ${PROTOBUF_INCLUDE_DIRS})
 
-set(GENERATED_CODE_DIR ${CMAKE_CURRENT_BINARY_DIR}/generated)
+set(GENERATED_CODE_DIR ${CMAKE_BINARY_DIR}/generated) # => /home/niyazi/microservice/build/generated
+#set(GENERATED_CODE_DIR ${CMAKE_CURRENT_BINARY_DIR}/generated) # => /home/niyazi/microservice/build/proto/generated
 file(MAKE_DIRECTORY ${GENERATED_CODE_DIR})
 
 #set(PROTOC /usr/bin/protoc)
@@ -48,7 +49,6 @@ set(PROTO_FILE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(PROTO_FILES ${PROTO_FILE_DIR}/room.proto)
 
 
-message(GENERATED_CODE_DIR                  " => ${GENERATED_CODE_DIR}")
 message(PROTOCOMPILER                       " => ${PROTOC}")
 message(GRPC_CPP_PLUGIN_EXECUTABLE          " => ${GRPC_CPP_PLUGIN_EXECUTABLE}")
 message(PROTO_FILE_DIR                      " => ${PROTO_FILE_DIR}")
@@ -56,6 +56,8 @@ message(PROTOBUF_INCLUDE_DIRS               " => ${PROTOBUF_INCLUDE_DIRS}")
 message(GRPC_INCLUDE_DIRS                   " => ${GRPC_INCLUDE_DIRS}")
 message(CURRENT_SOURCE_DIR                  " => ${CMAKE_CURRENT_SOURCE_DIR}")
 message(CURRENT_BINARY_DIR                  " => ${CMAKE_CURRENT_BINARY_DIR}")
+message(BINARY_DIR                          " => ${CMAKE_BINARY_DIR}")
+message(GENERATED_CODE_DIR                  " => ${GENERATED_CODE_DIR}")
 
 
 # Add custom command to generate source files
@@ -81,10 +83,13 @@ block comment
 #
 # Add Library target with protobuf sources
 #
-add_library(protodatabase ${GENERATED_SRCS} ${GENERATED_HDRS})
-target_link_libraries(protodatabase
+add_library(protolibrary STATIC ${GENERATED_SRCS} ${GENERATED_HDRS})
+
+target_link_libraries(protolibrary
     PUBLIC
         libprotobuf
         grpc
         grpc++
 )
+
+add_custom_target(proto DEPENDS protolibrary)
